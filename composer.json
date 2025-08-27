@@ -1,0 +1,25 @@
+{
+  "name": "websitesa/yii2-helpers",
+  "description": "Helpers compartilhados para projetos Yii2.",
+  "type": "library",
+  "license": "proprietary",
+  "authors": [
+    { "name": "Jefferson C. Dias", "email": "jefferson_costa@puc-rio.br" }
+  ],
+  "require": {
+    "php": ">=8.3",
+    "yiisoft/yii2": "^2.0.45"
+  },
+  "autoload": {
+    "psr-4": {
+      "Websitesa\\Yii2\\Helpers\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Websitesa\\Yii2\\Helpers\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
