@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers;
+namespace Websitesa\Yii2\Helpers\Helper;
 
 final class RequestHelper
 {

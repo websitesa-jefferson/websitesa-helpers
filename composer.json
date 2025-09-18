@@ -12,7 +12,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Websitesa\\Yii2\\Helpers\\": "src/"
+      "Websitesa\\Yii2\\Helpers\\Helper\\": "src/helper/",
+      "Websitesa\\Yii2\\Helpers\\Validator\\": "src/validator/"
     }
   },
   "autoload-dev": {
