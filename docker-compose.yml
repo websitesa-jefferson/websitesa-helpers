@@ -6,5 +6,8 @@ services:
     volumes:
       - ./:/app
       - $HOME/.ssh:/root/.ssh
+      - /var/.envs/websitesa-helpers.env:/var/.envs/websitesa-helpers.env
+    env_file:
+      - /var/.envs/websitesa-helpers.env
     cpus: 0.3
     mem_limit: 512m
