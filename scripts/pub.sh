@@ -36,6 +36,23 @@ fi
 
 echo -e "\n${GREEN}Push realizado com sucesso!${NC}\n"
 
+# git tag
+echo -e "\n${YELLOW}Sobreescrevendo tag local...${NC}\n"
+git tag -f v1.0.0
+if [ $? -ne 0 ]; then
+    echo -e "\n${RED}Erro ao sobreescrever tag local. Verifique sua conexão e permissões.${NC}\n"
+    exit 1
+fi
+
+echo -e "\n${YELLOW}Sobreescrevendo tag remota...${NC}\n"
+git push origin -f v1.0.0
+if [ $? -ne 0 ]; then
+    echo -e "\n${RED}Erro ao sobreescrever tag remota. Verifique sua conexão e permissões.${NC}\n"
+    exit 1
+fi
+
+echo -e "\n${GREEN}Tags atualizadas com sucesso!${NC}\n"
+
 chown -R 1000:1000 ~/.ssh
 
 exit 0
