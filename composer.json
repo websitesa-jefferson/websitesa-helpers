@@ -1,19 +1,41 @@
 {
   "name": "websitesa/yii2-helpers",
-  "description": "Helpers compartilhados para projetos Yii2.",
+  "description": "Websitesa Helpers compartilhados para projetos Yii2.",
   "type": "library",
   "license": "proprietary",
   "authors": [
     { "name": "Jefferson C. Dias", "email": "jefferson_costa@puc-rio.br" }
   ],
+  "prefer-stable": true,
+  "minimum-stability": "stable",
   "require": {
     "php": ">=8.3",
     "yiisoft/yii2": "^2.0.45"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6.23",
+    "friendsofphp/php-cs-fixer": "^3.86",
+    "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan-strict-rules": "^2.0",
+    "phpstan/phpstan-phpunit": "^2.0",
+    "yii2-extensions/phpstan": "^0.3.1"
+  },
+  "config": {
+    "process-timeout": 1800,
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "scripts": {
+    "test"     : "php vendor/bin/phpunit",
+    "cs-fixer" : "php vendor/bin/php-cs-fixer fix",
+    "phpstan"  : "php vendor/bin/phpstan analyse --memory-limit=512M --level=9"
+  },
   "autoload": {
     "psr-4": {
-      "Websitesa\\Yii2\\Helpers\\Helper\\": "src/helper/",
-      "Websitesa\\Yii2\\Helpers\\Validator\\": "src/validator/"
+      "Websitesa\\Yii2\\Helpers\\Helper\\": "src/helpers/",
+      "Websitesa\\Yii2\\Helpers\\Validator\\": "src/validators/"
     }
   },
   "autoload-dev": {
@@ -21,6 +43,10 @@
       "Websitesa\\Yii2\\Helpers\\Tests\\": "tests/"
     }
   },
-  "minimum-stability": "stable",
-  "prefer-stable": true
+  "repositories": [
+      {
+          "type": "composer",
+          "url" : "https://asset-packagist.org"
+      }
+  ]
 }

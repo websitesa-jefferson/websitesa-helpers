@@ -1,0 +1,8 @@
+# Remover diretório do cache para re-ignorar
+#git rm -r --cached meu-diretorio/
+#git commit -m "Removendo meu-diretorio do controle de versão"
+
+# composer vendor dir
+var/
+vendor/
+.php-cs-fixer.cache

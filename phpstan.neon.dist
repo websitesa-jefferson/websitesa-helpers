@@ -1,0 +1,15 @@
+parameters:
+    level: 9
+    paths:
+        - src
+    excludePaths:
+        - /app/src/helpers/WebhookHelper.php
+    tmpDir: var/phpstan
+    ignoreErrors:
+        - '#Access to an undefined property: yii\\.*#'
+        - '#Call to an undefined method yii\\.*#'
+        - '#Variable property access on yii\\base\\Model.#'
+        - '#Call to static method error\(\) on an unknown class Yii#'
+        - '#Call to static method t\(\) on an unknown class Yii#'
+        - '#Access to static property \$app on an unknown class Yii#'
+    reportUnmatchedIgnoredErrors: false

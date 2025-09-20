@@ -1,0 +1,10 @@
+services:
+
+  websitesa-helpers-yii2:
+    build: .
+    container_name: websitesa-helpers-yii2
+    volumes:
+      - ./:/app
+      - $HOME/.ssh:/root/.ssh
+    cpus: 0.3
+    mem_limit: 512m

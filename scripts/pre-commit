@@ -1,0 +1,36 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # sem cor
+
+# PHP-CS-Fixer - Verificar se há código fora do padrão
+printf "\n${YELLOW}PHP-CS-Fixer - Verificando formatação...${NC}\n"
+php vendor/bin/php-cs-fixer fix --dry-run --diff
+if [ $? -ne 0 ]; then
+  printf "\n${RED}❌ PHP-CS-Fixer encontrou arquivos que precisam ser formatados. Commit bloqueado.${NC}\n"
+  printf "${YELLOW}💡 Rode: composer cs-fixer${NC}\n"
+  exit 1
+fi
+printf "\n${GREEN}✅ Código formatado corretamente.${NC}\n"
+
+# PHPStan - Análise estática
+printf "\n${YELLOW}PHPStan - Analisando código...${NC}\n"
+php vendor/bin/phpstan analyse --memory-limit=512M --level=9
+if [ $? -ne 0 ]; then
+  printf "\n${RED}❌ PHPStan encontrou erros. Commit bloqueado.${NC}\n"
+  exit 1
+fi
+printf "\n${GREEN}✅ PHPStan passou!${NC}\n"
+
+# Codeception - Testes API, Unitário, Funcional
+printf "\n${YELLOW}Executando testes PHPUnit...${NC}\n"
+php vendor/bin/phpunit
+if [ $? -ne 0 ]; then
+  printf "\n${RED}❌ Testes falharam. Commit bloqueado.${NC}\n"
+  exit 1
+fi
+printf "\n${GREEN}✅ Testes passaram. Commit liberado.${NC}\n"
+
+exit 0

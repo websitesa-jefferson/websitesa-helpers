@@ -51,11 +51,17 @@ class ConvertHelper
             ARRAY_FILTER_USE_BOTH
         );
 
-        $arrayMap = array_map(
-            fn (string|int $value): string => Yii::t('app', (string) $value),
-            $filtered
-        );
+        $translate = static fn (string|int $value): string => Yii::t('app', (string) $value);
 
-        return $assoc ? $arrayMap : array_values($arrayMap);
+        if ($assoc) {
+            $assocResult = [];
+            foreach ($filtered as $name => $value) {
+                $assocResult[$name] = $translate($value);
+            }
+
+            return $assocResult;
+        }
+
+        return array_map($translate, array_values($filtered));
     }
 }
