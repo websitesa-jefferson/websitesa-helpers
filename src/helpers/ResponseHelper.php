@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Websitesa\Yii2\Helpers\Helper;
 
-use Yii;
+use Websitesa\Yii2\Helpers\Dto\ApiResponseDto;
 use yii\base\InvalidValueException;
 
 /**
@@ -39,7 +39,7 @@ class ResponseHelper
 
     /**
      * @param array<string, mixed> $data
-     * @return ApiResponseBase&array<string, mixed>
+     * @return array<string, mixed>
      */
     public static function sendResponse(
         string $name,
@@ -48,22 +48,9 @@ class ResponseHelper
         int $status,
         array $data = []
     ): array {
-        $responseData = [
-            'name'    => $name,
-            'message' => $message,
-            'code'    => $code,
-            'status'  => $status,
-        ];
+        $dto = new ApiResponseDto($name, $message, $code, $status, $data);
+        $dto->applyToResponse();
 
-        if ($data !== []) {
-            $responseData = array_merge($responseData, $data);
-        }
-
-        /** @var ApiResponseBase&array<string, mixed> $responseData */
-
-        Yii::$app->response->setStatusCode($status);
-        Yii::$app->response->data = $responseData;
-
-        return $responseData;
+        return $dto->toArray();
     }
 }

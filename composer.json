@@ -34,6 +34,7 @@
   },
   "autoload": {
     "psr-4": {
+      "Websitesa\\Yii2\\Helpers\\Dto\\": "src/dtos/",
       "Websitesa\\Yii2\\Helpers\\Helper\\": "src/helpers/",
       "Websitesa\\Yii2\\Helpers\\Validator\\": "src/validators/"
     }
