@@ -39,7 +39,6 @@ class ResponseHelper
 
     /**
      * @param array<string, mixed> $data
-     * @return array<string, mixed>
      */
     public static function sendResponse(
         string $name,
@@ -47,10 +46,10 @@ class ResponseHelper
         int $code,
         int $status,
         array $data = []
-    ): array {
+    ): ApiResponseDto {
         $dto = new ApiResponseDto($name, $message, $code, $status, $data);
         $dto->applyToResponse();
 
-        return $dto->toArray();
+        return $dto;
     }
 }

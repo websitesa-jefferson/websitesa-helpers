@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace app\tests\unit;
 
+use Websitesa\Yii2\Helpers\Dto\ApiResponseDto;
 use Websitesa\Yii2\Helpers\Helper\ResponseHelper;
 use Websitesa\Yii2\Helpers\Helper\Tests\TestCase;
 use Yii;
@@ -67,16 +68,11 @@ class ResponseHelperTest extends TestCase
 
         $result = ResponseHelper::sendResponse($name, $message, $code, $status);
 
-        $expected = [
-            'name'    => $name,
-            'message' => $message,
-            'code'    => $code,
-            'status'  => $status,
-        ];
+        $expected = new ApiResponseDto($name, $message, $code, $status);
 
         $this->assertEquals($expected, $result);
         $this->assertEquals($status, Yii::$app->response->statusCode);
-        $this->assertEquals($expected, Yii::$app->response->data);
+        $this->assertEquals($expected->toArray(), Yii::$app->response->data);
     }
 
     public function testSendResponseWithData()
@@ -89,15 +85,10 @@ class ResponseHelperTest extends TestCase
 
         $result = ResponseHelper::sendResponse($name, $message, $code, $status, $extraData);
 
-        $expected = array_merge([
-            'name'    => $name,
-            'message' => $message,
-            'code'    => $code,
-            'status'  => $status,
-        ], $extraData);
+        $expected = new ApiResponseDto($name, $message, $code, $status, $extraData);
 
         $this->assertEquals($expected, $result);
         $this->assertEquals($status, Yii::$app->response->statusCode);
-        $this->assertEquals($expected, Yii::$app->response->data);
+        $this->assertEquals($expected->toArray(), Yii::$app->response->data);
     }
 }
