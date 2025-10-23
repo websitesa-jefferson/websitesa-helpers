@@ -6,22 +6,15 @@ namespace Websitesa\Yii2\Helpers\Dto;
 
 class ApiResponseDto
 {
-    public string $name;
-    public string $message;
-    public int $code;
-    public int $status;
-    /** @var array<string, mixed> */
-    public array $data;
-
     /**
      * @param array<string, mixed> $data
      */
     public function __construct(
-        string $name,
-        string $message,
-        int $code,
-        int $status,
-        array $data = []
+        public string $name,
+        public string $message,
+        public int $code,
+        public int $status,
+        public array $data = []
     ) {
         $this->name = $name;
         $this->message = $message;
