@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Websitesa\Yii2\Helpers\Helper;
 
+use Yii;
+use yii\web\Request;
+
 final class RequestHelper
 {
     /**
@@ -37,4 +40,22 @@ final class RequestHelper
     //     $h = gethostname();
     //     return is_string($h) ? $h : '';
     // }
+
+    /** Retorna o token do cabeçalho */
+    public static function getTokenHeader(): string
+    {
+        $request = Yii::$app->get('request', false);
+        if ($request instanceof Request === false) {
+            return '';
+        }
+
+        $authHeader = $request->getHeaders()->get('Authorization');
+        if (is_string($authHeader) === false) {
+            return '';
+        }
+
+        return str_starts_with($authHeader, 'Bearer ')
+            ? substr($authHeader, 7)
+            : $authHeader;
+    }
 }
