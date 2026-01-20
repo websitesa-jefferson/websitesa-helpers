@@ -1,10 +1,11 @@
-FROM yiisoftware/yii2-php:8.3-apache
+ARG PHP_BASE_IMAGE_VERSION
+FROM yiisoftware/yii2-php:${PHP_BASE_IMAGE_VERSION}
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir -p /app
 
 WORKDIR /app
-
-COPY . .
 
 # PHP extensions & packages
 RUN set -ex \
@@ -20,5 +21,8 @@ RUN set -ex \
 # Start
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
+
+# Código da aplicação (por último para cache)
+COPY . .
 
 CMD [ "bash", "/start.sh" ]
