@@ -27,7 +27,6 @@ class StringHelper extends BaseStringHelper
 
     /**
      * Capitalize a name properly, ignoring prepositions like "da", "de", "do", etc.
-     * 
      * @param string $name
      * @return string
      */
