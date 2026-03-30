@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-#php ../vendor/bin/phpunit ResponseHelperTest:<teste>
+#php vendor/bin/phpunit tests/ResponseHelperTest.php --filter testFormatErrosNormal
 
 namespace app\tests\unit;
 

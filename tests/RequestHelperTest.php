@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-#php ../vendor/bin/phpunit RequestHelperTest:<teste>
+#php vendor/bin/phpunit tests/RequestHelperTest.php --filter testGetHostNameFromHttpHost
 
 namespace app\tests\unit;
 

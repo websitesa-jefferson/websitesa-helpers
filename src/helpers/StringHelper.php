@@ -24,4 +24,31 @@ class StringHelper extends BaseStringHelper
     ): string {
         return BaseInflector::slug($string, $replacement, $lowercase);
     }
+
+    /**
+     * Capitalize a name properly, ignoring prepositions like "da", "de", "do", etc.
+     * 
+     * @param string $name
+     * @return string
+     */
+    public static function capitalizeName(string $name): string
+    {
+        $words = explode(' ', mb_strtolower(trim($name), 'UTF-8'));
+        $exceptions = ['de', 'da', 'do', 'das', 'dos', 'e', 'di', 'del', 'van', 'von'];
+
+        $formattedWords = [];
+        foreach ($words as $word) {
+            if ($word === '') {
+                $formattedWords[] = '';
+                continue;
+            }
+            if (empty($formattedWords) || !in_array($word, $exceptions, true)) {
+                $formattedWords[] = mb_convert_case($word, MB_CASE_TITLE, 'UTF-8');
+            } else {
+                $formattedWords[] = $word;
+            }
+        }
+
+        return implode(' ', $formattedWords);
+    }
 }

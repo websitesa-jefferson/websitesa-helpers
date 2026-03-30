@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-#php ../vendor/bin/phpunit ConvertHelperTest:<teste>
+#php vendor/bin/phpunit tests/ConvertHelperTest.php --filter testConvertToNull
 
 namespace Websitesa\Yii2\Helpers\Tests;
 

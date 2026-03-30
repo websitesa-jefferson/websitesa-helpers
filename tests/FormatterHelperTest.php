@@ -1,6 +1,6 @@
 <?php
 
-#php ../vendor/bin/phpunit FormatterHelperTest:<teste>
+#php vendor/bin/phpunit tests/FormatterHelperTest.php --filter testTimeInMinutesExact
 
 namespace app\tests\unit;
 

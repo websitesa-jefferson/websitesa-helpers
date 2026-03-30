@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-#php ../vendor/bin/phpunit ValidationHelperTest:<teste>
+#php vendor/bin/phpunit tests/ValidationHelperTest.php --filter testMatchIPExact
 
 namespace app\tests\unit;
 

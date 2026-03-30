@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-#php ../vendor/bin/phpunit CheckHelperTest:<teste>
+#php vendor/bin/phpunit tests/CheckHelperTest.php --filter testValueExistsAllValid
 
 namespace app\tests\unit;
 
