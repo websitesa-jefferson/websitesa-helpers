@@ -12,19 +12,19 @@ use yii\log\LogRuntimeException;
 
 class FileTarget extends Target
 {
-    /** @var string */
+    /**  */
     public string $logFile = '';
-    /** @var bool */
+    /**  */
     public bool $enableRotation = true;
-    /** @var int */
+    /**  */
     public int $maxFileSize = 10240; // in KB
-    /** @var int */
+    /**  */
     public int $maxLogFiles = 5;
-    /** @var int|null */
+    /**  */
     public ?int $fileMode = null;
-    /** @var int */
+    /**  */
     public int $dirMode = 0775;
-    /** @var bool */
+    /**  */
     public bool $rotateByCopy = true;
 
     public function init(): void

@@ -37,13 +37,13 @@ abstract class Target extends Component
     ];
     /** @var callable|null */
     public $prefix;
-    /** @var int */
+    /**  */
     public int $exportInterval = 1000;
     /** @var array<int, array<int, mixed>> */
     public array $messages = [];
-    /** @var bool */
+    /**  */
     public bool $microtime = false;
-    /** @var int */
+    /**  */
     private int $_levels = 0;
     /** @var bool|callable */
     private $_enabled = true;
@@ -270,9 +270,7 @@ abstract class Target extends Component
         $this->_enabled = $value;
     }
 
-    /**
-     * @return bool
-     */
+    /**  */
     public function getEnabled(): bool
     {
         if (is_callable($this->_enabled)) {
