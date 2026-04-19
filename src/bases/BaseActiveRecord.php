@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Websitesa\Yii2\Helpers\Base;
 
+// @TODO Remover após desenvolvimento do sistema
 // if (in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) === false) {
 //     die('You are not allowed to access this service.');
 // }
