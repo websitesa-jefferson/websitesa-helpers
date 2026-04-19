@@ -27,8 +27,6 @@ class StringHelper extends BaseStringHelper
 
     /**
      * Capitalize a name properly, ignoring prepositions like "da", "de", "do", etc.
-     * @param string $name
-     * @return string
      */
     public static function capitalizeName(string $name): string
     {
@@ -41,7 +39,7 @@ class StringHelper extends BaseStringHelper
                 $formattedWords[] = '';
                 continue;
             }
-            if (empty($formattedWords) || !in_array($word, $exceptions, true)) {
+            if ($formattedWords === [] || !in_array($word, $exceptions, true)) {
                 $formattedWords[] = mb_convert_case($word, MB_CASE_TITLE, 'UTF-8');
             } else {
                 $formattedWords[] = $word;

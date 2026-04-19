@@ -9,20 +9,18 @@ use Yii;
 class EmailHelper
 {
     /**
-     * Envia e-mail usando o mailer do Yii2.
-     *
-     *
-     * @phpstan-param string|array<int, string>|array<string, string> $to   Email único, lista de emails ou mapa email=>nome
-     * @phpstan-param array<int, string>|array<string, string> $bcc         Lista de emails ou mapa email=>nome
-     * @phpstan-param array<string, mixed> $params                          Parâmetros usados no view do Yii
-     * @phpstan-param list<string> $attachs                                 Caminhos de arquivos para anexar
+     * @param string|array<string, string> $from
+     * @param string|array<string, string> $to
+     * @param string|array<string, string>|null $bcc
+     * @param array<string, mixed> $params
+     * @param array<int, string> $attachs
      */
     public static function sendMail(
-        string $from,
+        string|array $from,
         string|array $to,
         string $subject,
         string $view,
-        array $bcc = [],
+        string|array|null $bcc = [],
         array $params = [],
         array $attachs = []
     ): bool {
@@ -36,7 +34,7 @@ class EmailHelper
                 ->setTo($to)
                 ->setSubject($subject);
 
-            if ($bcc !== []) {
+            if ($bcc !== [] && $bcc !== null && $bcc !== '') {
                 $message->setBcc($bcc);
             }
 

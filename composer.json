@@ -10,7 +10,14 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.3",
-    "yiisoft/yii2": "^2.0.45"
+    "yiisoft/yii2": "^2.0.45",
+    "light/yii2-swagger": "^3.0",
+    "andreyv/yii2-ip-ratelimiter": "^2.0",
+    "lcobucci/jwt": "~4.2.1",
+    "sizeg/yii2-jwt": "v4.0-beta",
+    "firebase/php-jwt": "^7.0",
+    "yiisoft/yii2-queue": "^2.3",
+    "minishlink/web-push": "^10.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.6.23",
@@ -34,8 +41,13 @@
   },
   "autoload": {
     "psr-4": {
+      "Websitesa\\Yii2\\Helpers\\Base\\": "src/bases/",
       "Websitesa\\Yii2\\Helpers\\Dto\\": "src/dtos/",
+      "Websitesa\\Yii2\\Helpers\\Enum\\": "src/enums/",
+      "Websitesa\\Yii2\\Helpers\\Filter\\": "src/filters/",
       "Websitesa\\Yii2\\Helpers\\Helper\\": "src/helpers/",
+      "Websitesa\\Yii2\\Helpers\\Job\\": "src/jobs/",
+      "Websitesa\\Yii2\\Helpers\\Rest\\": "src/rest/",
       "Websitesa\\Yii2\\Helpers\\Validator\\": "src/validators/"
     }
   },

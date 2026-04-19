@@ -11,5 +11,10 @@ parameters:
         - '#Variable property access on yii\\base\\Model.#'
         - '#Call to static method error\(\) on an unknown class Yii#'
         - '#Call to static method t\(\) on an unknown class Yii#'
+        - '#Call to static method getAlias\(\) on an unknown class Yii#'
         - '#Access to static property \$app on an unknown class Yii#'
+        - '#Class Websitesa\\Yii2\\Helpers\\Base\\BaseActiveController extends generic class yii\\rest\\ActiveController but does not specify its types: T#'
+        - '#Class Websitesa\\Yii2\\Helpers\\Base\\BaseController extends generic class yii\\rest\\Controller but does not specify its types: T#'
+        - '#Property Websitesa\\Yii2\\Helpers\\Filter\\AccessControlFilter::\$_action with generic class yii\\base\\Controller does not specify its types: T#'
+        - '#Class Websitesa\\Yii2\\Helpers\\Filter\\AccessControlFilter extends generic class yii\\filters\\AccessControl but does not specify its types: T#'
     reportUnmatchedIgnoredErrors: false
