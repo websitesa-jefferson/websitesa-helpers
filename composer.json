@@ -47,6 +47,7 @@
       "Websitesa\\Yii2\\Helpers\\Filter\\": "src/filters/",
       "Websitesa\\Yii2\\Helpers\\Helper\\": "src/helpers/",
       "Websitesa\\Yii2\\Helpers\\Job\\": "src/jobs/",
+      "Websitesa\\Yii2\\Helpers\\Log\\": "src/log/",
       "Websitesa\\Yii2\\Helpers\\Rest\\": "src/rest/",
       "Websitesa\\Yii2\\Helpers\\Validator\\": "src/validators/"
     }
