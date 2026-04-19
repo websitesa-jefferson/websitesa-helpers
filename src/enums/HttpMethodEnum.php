@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Enum;
+namespace Websitesa\Yii2\Helpers\Enums;
 
 /**
  * Enum de métodos HTTP suportados.

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Job;
+namespace Websitesa\Yii2\Helpers\Jobs;
 
-use Websitesa\Yii2\Helpers\Service\PushNotificationService;
+use Websitesa\Yii2\Helpers\Services\PushNotificationService;
 use yii\queue\JobInterface;
 
 /**

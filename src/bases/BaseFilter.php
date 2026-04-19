@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Base;
+namespace Websitesa\Yii2\Helpers\Bases;
 
-use Websitesa\Yii2\Helpers\Filter\AccessControlFilter;
+use Websitesa\Yii2\Helpers\Filters\AccessControlFilter;
 
 class BaseFilter extends AccessControlFilter
 {

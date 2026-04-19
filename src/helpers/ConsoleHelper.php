@@ -1,6 +1,6 @@
 <?php
 
-namespace Websitesa\Yii2\Helpers\Helper;
+namespace Websitesa\Yii2\Helpers\Helpers;
 
 use yii\helpers\Console;
 

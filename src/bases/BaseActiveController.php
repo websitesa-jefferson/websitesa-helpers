@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Base;
+namespace Websitesa\Yii2\Helpers\Bases;
 
 use andreyv\ratelimiter\IpRateLimiter;
 use light\swagger\SwaggerAction;
 use light\swagger\SwaggerApiAction;
 use sizeg\jwt\JwtHttpBearerAuth;
-use Websitesa\Yii2\Helpers\Helper\RequestHelper;
+use Websitesa\Yii2\Helpers\Helpers\RequestHelper;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\auth\HttpBearerAuth;

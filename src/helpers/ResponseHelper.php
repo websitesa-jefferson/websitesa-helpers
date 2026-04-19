@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Helper;
+namespace Websitesa\Yii2\Helpers\Helpers;
 
-use Websitesa\Yii2\Helpers\Dto\ApiResponseDto;
+use Websitesa\Yii2\Helpers\Dtos\ApiResponseDto;
 use yii\base\InvalidValueException;
 
 /**

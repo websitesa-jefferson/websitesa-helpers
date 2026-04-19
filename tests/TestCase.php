@@ -1,6 +1,6 @@
 <?php
 
-namespace Websitesa\Yii2\Helpers\Helper\Tests;
+namespace Websitesa\Yii2\Helpers\Tests;
 
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Yii;

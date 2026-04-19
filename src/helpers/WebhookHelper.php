@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Helper;
+namespace Websitesa\Yii2\Helpers\Helpers;
 
 use Yii;
 use yii\httpclient\Client;

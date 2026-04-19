@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Service;
+namespace Websitesa\Yii2\Helpers\Services;
 
 interface PushNotificationServiceInterface
 {

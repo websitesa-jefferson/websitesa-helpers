@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Filter;
+namespace Websitesa\Yii2\Helpers\Filters;
 
-use Websitesa\Yii2\Helpers\Helper\CheckHelper;
+use Websitesa\Yii2\Helpers\Helpers\CheckHelper;
 use Yii;
 use yii\db\ActiveQuery;
 

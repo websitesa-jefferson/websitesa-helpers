@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Service;
+namespace Websitesa\Yii2\Helpers\Services;
 
 use Minishlink\WebPush\Subscription;
 use Minishlink\WebPush\WebPush;
-use Websitesa\Yii2\Helpers\Job\PushNotificationJob;
+use Websitesa\Yii2\Helpers\Jobs\PushNotificationJob;
 use Websitesa\Yii2\Helpers\Models\PushSubscription;
 use Yii;
 

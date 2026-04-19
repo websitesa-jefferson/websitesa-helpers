@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Base;
+namespace Websitesa\Yii2\Helpers\Bases;
 
 // @TODO Remover após desenvolvimento do sistema
 // if (in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) === false) {

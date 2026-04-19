@@ -2,10 +2,9 @@
 
 #php vendor/bin/phpunit tests/FormatterHelperTest.php --filter testTimeInMinutesExact
 
-namespace app\tests\unit;
+namespace Websitesa\Yii2\Helpers\Tests;
 
-use Websitesa\Yii2\Helpers\Helper\FormatterHelper;
-use Websitesa\Yii2\Helpers\Helper\Tests\TestCase;
+use Websitesa\Yii2\Helpers\Helpers\FormatterHelper;
 use yii\base\InvalidValueException;
 
 class FormatterHelperTest extends TestCase

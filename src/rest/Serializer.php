@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Websitesa\Yii2\Helpers\Rest;
 
-use Websitesa\Yii2\Helpers\Helper\CheckHelper;
+use Websitesa\Yii2\Helpers\Helpers\CheckHelper;
 use Yii;
 use yii\base\Arrayable;
 use yii\base\Component;

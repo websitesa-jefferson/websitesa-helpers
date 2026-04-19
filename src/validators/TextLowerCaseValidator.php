@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Validator;
+namespace Websitesa\Yii2\Helpers\Validators;
 
-use Websitesa\Yii2\Helpers\Helper\CheckHelper;
+use Websitesa\Yii2\Helpers\Helpers\CheckHelper;
 use yii\base\Model;
 use yii\validators\Validator;
 

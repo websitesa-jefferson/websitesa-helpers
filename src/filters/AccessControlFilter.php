@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Filter;
+namespace Websitesa\Yii2\Helpers\Filters;
 
 use Yii;
 use yii\base\Action;

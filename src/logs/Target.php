@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Log;
+namespace Websitesa\Yii2\Helpers\Logs;
 
-use Websitesa\Yii2\Helpers\Helper\CheckHelper;
+use Websitesa\Yii2\Helpers\Helpers\CheckHelper;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;

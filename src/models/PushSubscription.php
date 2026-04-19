@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Websitesa\Yii2\Helpers\Models;
 
-use Websitesa\Yii2\Helpers\Base\BaseActiveRecord;
+use Websitesa\Yii2\Helpers\Bases\BaseActiveRecord;
 
 /**
  * This is the model class for table "{{%push_subscription}}".

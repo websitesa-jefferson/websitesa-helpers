@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Websitesa\Yii2\Helpers\Log;
+namespace Websitesa\Yii2\Helpers\Logs;
 
-use Websitesa\Yii2\Helpers\Job\SendMailJob;
+use Websitesa\Yii2\Helpers\Jobs\SendMailJob;
 use Yii;
 use yii\log\EmailTarget as LogEmailTarget;
 

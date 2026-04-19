@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 #php vendor/bin/phpunit tests/RequestHelperTest.php --filter testGetHostNameFromHttpHost
 
-namespace app\tests\unit;
+namespace Websitesa\Yii2\Helpers\Tests;
 
-use Websitesa\Yii2\Helpers\Helper\RequestHelper;
-use Websitesa\Yii2\Helpers\Helper\Tests\TestCase;
+use Websitesa\Yii2\Helpers\Helpers\RequestHelper;
 use Yii;
 use yii\web\HeaderCollection;
 use yii\web\Request;

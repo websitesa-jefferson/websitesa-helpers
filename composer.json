@@ -41,15 +41,17 @@
   },
   "autoload": {
     "psr-4": {
-      "Websitesa\\Yii2\\Helpers\\Base\\": "src/bases/",
-      "Websitesa\\Yii2\\Helpers\\Dto\\": "src/dtos/",
-      "Websitesa\\Yii2\\Helpers\\Enum\\": "src/enums/",
-      "Websitesa\\Yii2\\Helpers\\Filter\\": "src/filters/",
-      "Websitesa\\Yii2\\Helpers\\Helper\\": "src/helpers/",
-      "Websitesa\\Yii2\\Helpers\\Job\\": "src/jobs/",
-      "Websitesa\\Yii2\\Helpers\\Log\\": "src/log/",
+      "Websitesa\\Yii2\\Helpers\\Bases\\": "src/bases/",
+      "Websitesa\\Yii2\\Helpers\\Dtos\\": "src/dtos/",
+      "Websitesa\\Yii2\\Helpers\\Enums\\": "src/enums/",
+      "Websitesa\\Yii2\\Helpers\\Filters\\": "src/filters/",
+      "Websitesa\\Yii2\\Helpers\\Helpers\\": "src/helpers/",
+      "Websitesa\\Yii2\\Helpers\\Jobs\\": "src/jobs/",
+      "Websitesa\\Yii2\\Helpers\\Logs\\": "src/logs/",
       "Websitesa\\Yii2\\Helpers\\Rest\\": "src/rest/",
-      "Websitesa\\Yii2\\Helpers\\Validator\\": "src/validators/"
+      "Websitesa\\Yii2\\Helpers\\Services\\": "src/services/",
+      "Websitesa\\Yii2\\Helpers\\Models\\": "src/models/",
+      "Websitesa\\Yii2\\Helpers\\Validators\\": "src/validators/"
     }
   },
   "autoload-dev": {

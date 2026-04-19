@@ -6,8 +6,7 @@ declare(strict_types=1);
 
 namespace Websitesa\Yii2\Helpers\Tests;
 
-use Websitesa\Yii2\Helpers\Helper\ConvertHelper;
-use Websitesa\Yii2\Helpers\Helper\Tests\TestCase;
+use Websitesa\Yii2\Helpers\Helpers\ConvertHelper;
 use Yii;
 
 /**
