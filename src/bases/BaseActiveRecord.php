@@ -76,6 +76,16 @@ class BaseActiveRecord extends ActiveRecord
         ];
     }
 
+    public function getStatusId(): ?int
+    {
+        return $this->status_id;
+    }
+
+    public function setStatusId(?int $value): void
+    {
+        $this->status_id = $value;
+    }
+
     public function getCreatedAt(): ?int
     {
         return $this->created_at;
