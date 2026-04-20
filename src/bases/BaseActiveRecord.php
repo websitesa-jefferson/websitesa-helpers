@@ -24,10 +24,10 @@ use yii\db\ActiveRecord;
 class BaseActiveRecord extends ActiveRecord
 {
     public const CACHE_TAG = '';
-    public string $createdAt = '';
-    public string $createdBy = '';
-    public string $updatedAt = '';
-    public string $updatedBy = '';
+    public ?int $createdAt = null;
+    public ?int $createdBy = null;
+    public ?int $updatedAt = null;
+    public ?int $updatedBy = null;
 
     public function init(): void
     {
