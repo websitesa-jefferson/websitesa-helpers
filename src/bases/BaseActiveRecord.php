@@ -11,6 +11,7 @@ namespace Websitesa\Yii2\Helpers\Bases;
 
 use Yii;
 use yii\behaviors\AttributeBehavior;
+use yii\behaviors\BlameableBehavior;
 use yii\caching\CacheInterface;
 use yii\caching\TagDependency;
 use yii\db\ActiveRecord;
@@ -59,6 +60,11 @@ class BaseActiveRecord extends ActiveRecord
     public function behaviors(): array
     {
         return [
+            [
+                'class'              => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
             [
                 'class'      => AttributeBehavior::class,
                 'attributes' => [
