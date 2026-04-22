@@ -27,7 +27,8 @@ final class HttpClientService extends Client implements HttpClientServiceInterfa
         array $data = [],
         ?string $content = null,
         array $headers = [],
-        bool $raw = false
+        bool $raw = false,
+        int $timeout = 30
     ): HttpResponseDto {
         $token = RequestHelper::getTokenHeader();
 
@@ -49,7 +50,7 @@ final class HttpClientService extends Client implements HttpClientServiceInterfa
                 'options' => [
                     CURLOPT_SSL_VERIFYPEER => false,
                     CURLOPT_SSL_VERIFYHOST => false,
-                    CURLOPT_TIMEOUT        => 30,
+                    CURLOPT_TIMEOUT        => $timeout,
                     // CURLOPT_RESOLVE        => ['cmdi.websitesa.app.br:443:104.21.13.73'],
                 ],
             ];

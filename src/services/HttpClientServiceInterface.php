@@ -24,6 +24,7 @@ interface HttpClientServiceInterface
         array $data = [],
         ?string $content = null,
         array $headers = [],
-        bool $raw = false
+        bool $raw = false,
+        int $timeout = 30
     ): HttpResponseDto;
 }
