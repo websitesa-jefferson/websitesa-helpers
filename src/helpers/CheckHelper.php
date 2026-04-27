@@ -50,18 +50,13 @@ class CheckHelper
     /**
      * Verifica se o usuário possui permissão ou papel informado
      *
-     * @param string $name Nome da permissão ou papel
-     * @param 'getPermissionsByUser'|'getRolesByUser' $type Tipo de verificação
+     * @param int    $userId ID do usuário
+     * @param string $name   Nome da permissão ou papel
+     * @param string $type   Tipo de verificação
      * @return bool true se o usuário possui, false caso contrário
      */
-    public static function can(string $name, string $type): bool
+    public static function can(int $userId, string $name, string $type): bool
     {
-        $userId = Yii::$app->user->getId();
-
-        if ($userId === null) {
-            return false;
-        }
-
         $authManager = Yii::$app->authManager;
 
         if ($authManager instanceof ManagerInterface === false) {
