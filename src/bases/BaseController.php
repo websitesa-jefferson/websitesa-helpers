@@ -24,6 +24,9 @@ class BaseController extends Controller
 {
     use Swagger;
 
+    public $rateLimit = 60;
+    public $timePeriod = 60;
+
     // @phpstan-ignore-next-line Propriedade mágica Yii2
     public $serializer = [
         'class'              => 'yii\rest\Serializer',
@@ -39,8 +42,8 @@ class BaseController extends Controller
         if (!YII_ENV_TEST) {
             $behaviors['rateLimiter'] = [
                 'class'      => IpRateLimiter::class,
-                'rateLimit'  => 60,
-                'timePeriod' => 60,
+                'rateLimit'  => $this->rateLimit,
+                'timePeriod' => $this->timePeriod,
             ];
         }
 
