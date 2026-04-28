@@ -16,7 +16,10 @@ enum BaseEnum: int
                 self::Active   => 'Active',
                 self::Inactive => 'Inactive',
             },
-            default => $this->value,
+            default => match ($this) {
+                self::Active   => 'Ativo',
+                self::Inactive => 'Inativo',
+            },
         };
     }
 }

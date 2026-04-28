@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Websitesa\Yii2\Helpers\Services;
 
-use yii\httpclient\Client;
 use Websitesa\Yii2\Helpers\Dtos\HttpResponseDto;
+use yii\httpclient\Client;
 
 interface HttpClientServiceInterface
 {

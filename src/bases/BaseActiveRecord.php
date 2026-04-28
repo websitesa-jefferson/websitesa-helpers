@@ -17,6 +17,7 @@ use yii\caching\TagDependency;
 use yii\db\ActiveRecord;
 
 /**
+ * @property int|null $status_id
  * @property int|null $created_at
  * @property int|null $created_by
  * @property int|null $updated_at

@@ -24,8 +24,8 @@ class BaseActiveController extends ActiveController
 {
     use Swagger;
 
-    public $rateLimit = 60;
-    public $timePeriod = 60;
+    public int $rateLimit = 60;
+    public int $timePeriod = 60;
 
     // @phpstan-ignore-next-line Propriedade mágica Yii2
     public $serializer = [

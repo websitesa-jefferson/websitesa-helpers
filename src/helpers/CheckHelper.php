@@ -50,9 +50,9 @@ class CheckHelper
     /**
      * Verifica se o usuário possui permissão ou papel informado
      *
-     * @param int    $userId ID do usuário
-     * @param string $name   Nome da permissão ou papel
-     * @param string $type   Tipo de verificação
+     * @param int $userId ID do usuário
+     * @param string $name Nome da permissão ou papel
+     * @param string $type Tipo de verificação
      * @return bool true se o usuário possui, false caso contrário
      */
     public static function can(int $userId, string $name, string $type): bool
@@ -65,7 +65,8 @@ class CheckHelper
 
         $authItems = match ($type) {
             'getPermissionsByUser' => $authManager->getPermissionsByUser($userId),
-            'getRolesByUser'       => $authManager->getRolesByUser($userId)
+            'getRolesByUser'       => $authManager->getRolesByUser($userId),
+            default                => throw new \InvalidArgumentException("Invalid type '{$type}'"),
         };
 
         return isset($authItems[$name]);
