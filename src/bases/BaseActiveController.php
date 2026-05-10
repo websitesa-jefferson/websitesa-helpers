@@ -30,7 +30,7 @@ class BaseActiveController extends ActiveController
     // @phpstan-ignore-next-line Propriedade mágica Yii2
     public $serializer = [
         'class'              => 'yii\rest\Serializer',
-        'collectionEnvelope' => null,
+        'collectionEnvelope' => 'items',
     ];
 
     public function behaviors(): array
