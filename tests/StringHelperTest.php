@@ -71,4 +71,42 @@ class StringHelperTest extends TestCase
         $this->assertEquals('Da Silva', StringHelper::capitalizeName('DA SILVA'));
         $this->assertEquals('De Paula', StringHelper::capitalizeName('DE PAULA'));
     }
+
+    # splitSearchTerms()
+
+    public function testSplitSearchTermsWithSimpleString()
+    {
+        $value = '  minha   string de teste   ';
+        $expected = ['minha', 'string', 'de', 'teste'];
+        $this->assertEquals($expected, StringHelper::splitSearchTerms($value));
+    }
+
+    public function testSplitSearchTermsWithNullInput()
+    {
+        $this->assertEquals([], StringHelper::splitSearchTerms(null));
+    }
+
+    public function testSplitSearchTermsWithEmptyString()
+    {
+        $this->assertEquals([], StringHelper::splitSearchTerms(''));
+    }
+
+    public function testSplitSearchTermsWithOnlyWhitespace()
+    {
+        $this->assertEquals([], StringHelper::splitSearchTerms("   \t\n  "));
+    }
+
+    public function testSplitSearchTermsWithLimit()
+    {
+        $value = 'minha string de teste com muitas palavras';
+        $expected = ['minha', 'string', 'de'];
+        $this->assertEquals($expected, StringHelper::splitSearchTerms($value, 3));
+    }
+
+    public function testSplitSearchTermsWithEmptyResult()
+    {
+        $value = '   ';
+        $this->assertEquals([], StringHelper::splitSearchTerms($value));
+    }
+
 }

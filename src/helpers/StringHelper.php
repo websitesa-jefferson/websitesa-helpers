@@ -48,4 +48,25 @@ class StringHelper extends BaseStringHelper
 
         return implode(' ', $formattedWords);
     }
+
+    /**
+     * Splits a search string into an array of terms, limiting the number of terms.
+     * @param string|null $value The string to split.
+     * @param int $maxTerms The maximum number of terms to return.
+     * @return string[] An array of search terms.
+     */
+    public static function splitSearchTerms(?string $value, int $maxTerms = 5): array
+    {
+        $value = trim($value ?? '');
+        if ($value === '') {
+            return [];
+        }
+
+        $terms = preg_split('/\s+/', $value, -1, PREG_SPLIT_NO_EMPTY);
+        if ($terms === false) {
+            return [];
+        }
+
+        return array_slice($terms, 0, $maxTerms);
+    }
 }
