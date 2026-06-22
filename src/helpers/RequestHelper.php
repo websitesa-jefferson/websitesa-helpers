@@ -58,4 +58,37 @@ final class RequestHelper
             ? substr($authHeader, 7)
             : $authHeader;
     }
+
+    /** Retorna o domínio de origem da requisição */
+    public static function getRequestOrigin(): ?string
+    {
+        $request = Yii::$app->request;
+
+        $origin = $request->headers->get('Origin');
+        if (is_string($origin) === false || $origin === '') {
+            $origin = $request->headers->get('Referer');
+        }
+        if (is_string($origin) === false || $origin === '') {
+            $origin = $request->hostInfo;
+        }
+
+        if (is_string($origin) === false || $origin === '') {
+            return null;
+        }
+
+        $url = $origin;
+        if (!str_contains($url, '://')) {
+            $url = 'https://' . $url;
+        }
+
+        $parsed = parse_url($url);
+        if ($parsed === false || !isset($parsed['host'])) {
+            return null;
+        }
+
+        $host = $parsed['host'];
+        $port = isset($parsed['port']) ? ':' . $parsed['port'] : '';
+
+        return 'https://' . $host . $port;
+    }
 }

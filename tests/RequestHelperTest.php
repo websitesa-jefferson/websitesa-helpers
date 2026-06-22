@@ -101,6 +101,42 @@ class RequestHelperTest extends TestCase
 
         $this->assertSame('ABC123TOKEN', RequestHelper::getTokenHeader());
     }
+
+    # getRequestOrigin()
+
+    public function testGetRequestOriginFromOriginHeader(): void
+    {
+        $request = new FakeWebRequest(['Origin' => 'http://myorigin.com/path']);
+        Yii::$app->set('request', $request);
+
+        $this->assertSame('https://myorigin.com', RequestHelper::getRequestOrigin());
+    }
+
+    public function testGetRequestOriginFromRefererHeader(): void
+    {
+        $request = new FakeWebRequest(['Referer' => 'https://myreferer.com:8080/foo/bar']);
+        Yii::$app->set('request', $request);
+
+        $this->assertSame('https://myreferer.com:8080', RequestHelper::getRequestOrigin());
+    }
+
+    public function testGetRequestOriginFromHostInfo(): void
+    {
+        $request = new FakeWebRequest([]);
+        $request->setHostInfo('http://myhostinfo.com');
+        Yii::$app->set('request', $request);
+
+        $this->assertSame('https://myhostinfo.com', RequestHelper::getRequestOrigin());
+    }
+
+    public function testGetRequestOriginReturnsNullWhenEmpty(): void
+    {
+        $request = new FakeWebRequest([]);
+        $request->setHostInfo(null);
+        Yii::$app->set('request', $request);
+
+        $this->assertNull(RequestHelper::getRequestOrigin());
+    }
 }
 
 /**
