@@ -89,9 +89,10 @@ final class RequestHelper
             return null;
         }
 
+        $scheme = $parsed['scheme'] ?? 'https';
         $host = $parsed['host'];
         $port = isset($parsed['port']) ? ':' . $parsed['port'] : '';
 
-        return 'https://' . $host . $port;
+        return $scheme . '://' . $host . $port;
     }
 }

@@ -109,7 +109,7 @@ class RequestHelperTest extends TestCase
         $request = new FakeWebRequest(['Origin' => 'http://myorigin.com/path']);
         Yii::$app->set('request', $request);
 
-        $this->assertSame('https://myorigin.com', RequestHelper::getRequestOrigin());
+        $this->assertSame('http://myorigin.com', RequestHelper::getRequestOrigin());
     }
 
     public function testGetRequestOriginFromRefererHeader(): void
@@ -126,7 +126,7 @@ class RequestHelperTest extends TestCase
         $request->setHostInfo('http://myhostinfo.com');
         Yii::$app->set('request', $request);
 
-        $this->assertSame('https://myhostinfo.com', RequestHelper::getRequestOrigin());
+        $this->assertSame('http://myhostinfo.com', RequestHelper::getRequestOrigin());
     }
 
     public function testGetRequestOriginReturnsNullWhenEmpty(): void
