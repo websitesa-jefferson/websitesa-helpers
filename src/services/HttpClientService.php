@@ -31,6 +31,7 @@ final class HttpClientService extends Client implements HttpClientServiceInterfa
         int $timeout = 30
     ): HttpResponseDto {
         $token = RequestHelper::getTokenHeader();
+        $origin = RequestHelper::getRequestOrigin();
 
         $defaultHeaders = [
             'Charset'      => self::CHARSET,
@@ -39,6 +40,10 @@ final class HttpClientService extends Client implements HttpClientServiceInterfa
 
         if ($token !== '') {
             $defaultHeaders['Authorization'] = $token;
+        }
+
+        if ($origin !== null && $origin !== '') {
+            $defaultHeaders['Origin'] = $origin;
         }
 
         $headers = array_merge($defaultHeaders, $headers);

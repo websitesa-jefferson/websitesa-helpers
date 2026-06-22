@@ -62,7 +62,10 @@ final class RequestHelper
     /** Retorna o domínio de origem da requisição */
     public static function getRequestOrigin(): ?string
     {
-        $request = Yii::$app->request;
+        $request = Yii::$app->get('request', false);
+        if ($request instanceof Request === false) {
+            return null;
+        }
 
         $origin = $request->headers->get('Origin');
         if (is_string($origin) === false || $origin === '') {
