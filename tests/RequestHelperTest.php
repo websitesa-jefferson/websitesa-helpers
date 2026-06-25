@@ -137,6 +137,33 @@ class RequestHelperTest extends TestCase
 
         $this->assertNull(RequestHelper::getRequestOrigin());
     }
+
+    # getRequestOriginPrefix()
+
+    public function testGetRequestOriginPrefixReturnsEmptyStringWhenOriginIsNull(): void
+    {
+        $request = new FakeWebRequest([]);
+        $request->setHostInfo(null);
+        Yii::$app->set('request', $request);
+
+        $this->assertSame('', RequestHelper::getRequestOriginPrefix());
+    }
+
+    public function testGetRequestOriginPrefixRemovesPort(): void
+    {
+        $request = new FakeWebRequest(['Referer' => 'https://myreferer.com:8080/foo/bar']);
+        Yii::$app->set('request', $request);
+
+        $this->assertSame('myreferer', RequestHelper::getRequestOriginPrefix());
+    }
+
+    public function testGetRequestOriginPrefixWithoutPort(): void
+    {
+        $request = new FakeWebRequest(['Origin' => 'http://myorigin.com/path']);
+        Yii::$app->set('request', $request);
+
+        $this->assertSame('myorigin', RequestHelper::getRequestOriginPrefix());
+    }
 }
 
 /**

@@ -95,4 +95,21 @@ final class RequestHelper
 
         return $scheme . '://' . $host . $port;
     }
+
+    /** Retorna o prefixo do domínio de origem da requisição */
+    public static function getRequestOriginPrefix(): string
+    {
+        $origin = self::getRequestOrigin();
+        if (is_string($origin) === false) {
+            return '';
+        }
+
+        $parsed = parse_url($origin);
+        if ($parsed === false || !isset($parsed['host'])) {
+            return '';
+        }
+
+        $parts = explode('.', $parsed['host']);
+        return $parts[0];
+    }
 }
