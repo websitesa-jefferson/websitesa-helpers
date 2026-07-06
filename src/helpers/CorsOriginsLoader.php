@@ -70,6 +70,11 @@ class CorsOriginsLoader
                 if (!is_dir($dir)) {
                     mkdir($dir, 0777, true);
                 }
+
+                if (file_exists($cacheFile) && !is_writable($cacheFile)) {
+                    @unlink($cacheFile);
+                }
+
                 file_put_contents($cacheFile, json_encode($allowedOrigins));
             } catch (\Throwable $e) {
                 // Fallback de segurança se o banco estiver indisponível
