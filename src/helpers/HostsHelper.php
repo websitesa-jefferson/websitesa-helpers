@@ -39,11 +39,8 @@ class HostsHelper
             return false;
         }
 
-        // Obtém o IP do proxy reverso ou o gateway da rede docker
-        $ip = gethostbyname('nginx-proxy');
-        if ($ip === 'nginx-proxy') {
-            $ip = '172.20.0.1'; // Gateway fallback
-        }
+        // Obtém o IP do host gateway (Docker) ou o proxy reverso de forma dinâmica
+        $ip = self::getDockerIp();
 
         $content = @file_get_contents($hostsFile);
         if ($content === false) {
@@ -131,5 +128,43 @@ class HostsHelper
         } catch (\Exception $e) {
             Yii::error("Erro ao sincronizar hosts no container {$containerName}: " . $e->getMessage(), 'hosts-sync');
         }
+    }
+
+    /**
+     * Tenta obter o IP do gateway do Docker (Host) ou do Proxy de forma dinâmica.
+     */
+    private static function getDockerIp(): string
+    {
+        // 1. Tenta resolver host.docker.internal (mapeado via extra_hosts)
+        $ip = gethostbyname('host.docker.internal');
+        if ($ip !== 'host.docker.internal') {
+            return $ip;
+        }
+
+        // 2. Tenta ler o gateway padrão do Linux (/proc/net/route)
+        if (is_readable('/proc/net/route')) {
+            $routes = file('/proc/net/route');
+            if ($routes !== false) {
+                foreach ($routes as $line) {
+                    $parts = preg_split('/\s+/', trim($line));
+                    if (isset($parts[1], $parts[2]) && $parts[1] === '00000000') {
+                        $hexIp = $parts[2];
+                        if (strlen($hexIp) === 8) {
+                            $octets = str_split($hexIp, 2);
+                            return hexdec($octets[3]) . '.' . hexdec($octets[2]) . '.' . hexdec($octets[1]) . '.' . hexdec($octets[0]);
+                        }
+                    }
+                }
+            }
+        }
+
+        // 3. Tenta resolver o proxy reverso pelo nome do container
+        $ip = gethostbyname('nginx-proxy');
+        if ($ip !== 'nginx-proxy') {
+            return $ip;
+        }
+
+        // 4. Fallback padrão da rede docker bridge
+        return '172.20.0.1';
     }
 }
