@@ -17,4 +17,6 @@ parameters:
         - '#Class Websitesa\\Yii2\\Helpers\\Bases\\BaseController extends generic class yii\\rest\\Controller but does not specify its types: T#'
         - '#Property Websitesa\\Yii2\\Helpers\\Filters\\AccessControlFilter::\$_action with generic class yii\\base\\Controller does not specify its types: T#'
         - '#Class Websitesa\\Yii2\\Helpers\\Filters\\AccessControlFilter extends generic class yii\\filters\\AccessControl but does not specify its types: T#'
+        - '#Call to static method find\(\) on an unknown class app\\models\\Origin\.#'
+        - '#Call to static method find\(\) on an unknown class app\\models\\Cors\.#'
     reportUnmatchedIgnoredErrors: false
