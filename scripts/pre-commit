@@ -5,28 +5,36 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # sem cor
 
-# PHP-CS-Fixer - Verificar se há código fora do padrão
-printf "\n${YELLOW}PHP-CS-Fixer - Verificando formatação...${NC}\n"
-php vendor/bin/php-cs-fixer fix --dry-run --diff
+CONTAINER_NAME="websitesa-helpers-yii2"
+
+# 1. Verifica se o container está rodando
+if ! docker ps --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
+  printf "\n${RED}❌ O container ${CONTAINER_NAME} não está rodando. Inicie-o antes de commitar.${NC}\n"
+  exit 1
+fi
+
+# 2. PHP-CS-Fixer (dentro do container)
+printf "\n${YELLOW}PHP-CS-Fixer - Verificando formatação no container...${NC}\n"
+docker exec -t $CONTAINER_NAME php vendor/bin/php-cs-fixer fix --dry-run --diff
 if [ $? -ne 0 ]; then
   printf "\n${RED}❌ PHP-CS-Fixer encontrou arquivos que precisam ser formatados. Commit bloqueado.${NC}\n"
-  printf "${YELLOW}💡 Rode: composer cs-fixer${NC}\n"
+  printf "${YELLOW}💡 Execute dentro do container para fixar: php vendor/bin/php-cs-fixer fix${NC}\n"
   exit 1
 fi
 printf "\n${GREEN}✅ Código formatado corretamente.${NC}\n"
 
-# PHPStan - Análise estática
-printf "\n${YELLOW}PHPStan - Analisando código...${NC}\n"
-php vendor/bin/phpstan analyse --memory-limit=512M --level=9
+# 3. PHPStan (dentro do container)
+printf "\n${YELLOW}PHPStan - Analisando código no container...${NC}\n"
+docker exec -t $CONTAINER_NAME php vendor/bin/phpstan analyse --memory-limit=512M --level=9
 if [ $? -ne 0 ]; then
   printf "\n${RED}❌ PHPStan encontrou erros. Commit bloqueado.${NC}\n"
   exit 1
 fi
 printf "\n${GREEN}✅ PHPStan passou!${NC}\n"
 
-# Codeception - Testes API, Unitário, Funcional
-printf "\n${YELLOW}Executando testes PHPUnit...${NC}\n"
-php vendor/bin/phpunit
+# 4. PHPUnit (dentro do container)
+printf "\n${YELLOW}Executando testes PHPUnit no container...${NC}\n"
+docker exec -t $CONTAINER_NAME php vendor/bin/phpunit
 if [ $? -ne 0 ]; then
   printf "\n${RED}❌ Testes falharam. Commit bloqueado.${NC}\n"
   exit 1

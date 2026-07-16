@@ -1,0 +1,43 @@
+# Ignorar controle de versão
+.git
+.gitignore
+.github
+
+# Ignorar o vendor local da máquina host
+vendor/
+
+# Ignorar IDEs e configurações locais
+.vscode/
+nbproject/
+.idea/
+.editorconfig
+.bowerrc
+
+# Ignorar logs, dumps e arquivos temporários
+logs/
+*.log
+nohup.out
+dump.rdb
+ca.pem
+backup/
+scratch/
+prompt.md
+
+# Ignorar caches de ferramentas e arquivos locais do PHP
+var/
+.php-cs-fixer.cache
+.phpunit.result.cache
+
+# Ignorar pastas de cache e uploads locais de Yii2 (gerados no runtime do container)
+**/runtime/
+**/web/assets/
+**/web/uploads/
+
+# Ignorar artefatos de testes
+tests/_output/
+tests/_support/_generated/
+
+# Ignorar arquivos do docker no build da imagem final
+# (Não ignore docker/ pois precisamos copiar as configurações e start.sh)
+docker-compose.yml
+docker-compose.*.yml
