@@ -21,9 +21,9 @@ class HostsHelper
         // 1. Atualiza o /etc/hosts do próprio container Auth-API
         self::updateLocalHostsFile($domains);
 
-        // 2. Dispara a sincronização para o PACS e RIS de forma assíncrona
-        self::triggerRemoteSync('websitesa-pacs-api-yii2', $domains);
-        self::triggerRemoteSync('websitesa-ris-api-yii2', $domains);
+        // 2. Dispara a sincronização para o PACS e RIS via nomes de serviço Swarm (VIP)
+        self::triggerRemoteSync('websitesa-pacs-api_rest', $domains);
+        self::triggerRemoteSync('websitesa-ris-api_rest', $domains);
     }
 
     /**

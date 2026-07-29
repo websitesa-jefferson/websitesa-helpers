@@ -1,6 +1,6 @@
 services:
 
-  websitesa-helpers-yii2:
+  yii2:
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -9,7 +9,6 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ./:/app
-      - /var/.envs/.env:/var/.envs/.env
     env_file:
       - /var/.envs/.env
     restart: unless-stopped
