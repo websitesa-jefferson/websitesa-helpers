@@ -72,7 +72,10 @@ class HostsHelper
         $domains = [];
 
         try {
-            $origins = Origin::find()->select(['url'])->where(['status_id' => 1])->column();
+            $origins = Origin::find()
+                ->select(['url'])
+                ->where(['status_id' => 1])
+                ->column();
             foreach ($origins as $url) {
                 $host = parse_url($url, PHP_URL_HOST);
                 if (is_string($host) && $host !== '') {
@@ -84,7 +87,10 @@ class HostsHelper
         }
 
         try {
-            $cors = Cors::find()->select(['url'])->where(['status_id' => 1])->column();
+            $cors = Cors::find()
+                ->select(['url'])
+                ->where(['status_id' => 1])
+                ->column();
             foreach ($cors as $url) {
                 $host = parse_url($url, PHP_URL_HOST);
                 if (is_string($host) && $host !== '') {
