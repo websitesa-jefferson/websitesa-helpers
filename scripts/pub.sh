@@ -8,7 +8,15 @@ NC='\033[0m' # sem cor
 # Define a versão (via parâmetro $1 ou solicita ao usuário)
 VERSION=$1
 if [ -z "$VERSION" ]; then
-    read -p "Digite a versão (ex: v1.0.0): " VERSION
+    echo -e "${YELLOW}Buscando a última tag remota no GitHub...${NC}"
+    LATEST_TAG=$(git ls-remote --tags origin 2>/dev/null | awk -F'/' '{print $3}' | grep -v '\^{}' | sort -V | tail -n 1)
+    if [ -n "$LATEST_TAG" ]; then
+        echo -e "Última tag remota: ${GREEN}${LATEST_TAG}${NC}"
+    else
+        echo -e "Nenhuma tag remota encontrada."
+    fi
+
+    read -p "Digite a versão (ex: 1.0.0): " VERSION
 fi
 
 if [ -z "$VERSION" ]; then

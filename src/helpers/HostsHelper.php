@@ -17,6 +17,7 @@ class HostsHelper
     public static function syncAll(): void
     {
         $domains = self::getActiveDomains();
+
         // 1. Atualiza o /etc/hosts do próprio container Auth-API
         self::updateLocalHostsFile($domains);
         // 2. Dispara a sincronização para o PACS e RIS via nomes de serviço Swarm (VIP)
