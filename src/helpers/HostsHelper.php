@@ -23,6 +23,7 @@ class HostsHelper
 
         // 2. Dispara a sincronização para o PACS e RIS via nomes de serviço Swarm (VIP)
         self::triggerRemoteSync('websitesa-pacs-api_rest', $domains);
+
         self::triggerRemoteSync('websitesa-ris-api_rest', $domains);
     }
 
