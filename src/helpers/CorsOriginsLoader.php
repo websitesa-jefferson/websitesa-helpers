@@ -42,40 +42,52 @@ class CorsOriginsLoader
         // 2. Se o cache expirou ou não existe, consulta o banco
         if ($allowedOrigins === []) {
             try {
-                $dsn = 'mysql:host=mysql-8.0;dbname=websitesa-auth-api;charset=utf8';
+                $hostsToTry = [];
+                $dbHostEnv = getenv('DB_HOST');
+                if ($dbHostEnv !== false && $dbHostEnv !== '') {
+                    $hostsToTry[] = $dbHostEnv;
+                }
+                $hostsToTry[] = 'mysql80';
+
+                $dbNameEnv = getenv('DB_NAME');
+                $dbname = ($dbNameEnv !== false && $dbNameEnv !== '') ? $dbNameEnv : 'websitesa-auth-api';
+
                 $dbUserEnv = getenv('DB_USER');
                 $user = ($dbUserEnv !== false && $dbUserEnv !== '') ? $dbUserEnv : 'root';
                 $dbPasswordEnv = getenv('DB_PASSWORD');
                 $password = ($dbPasswordEnv !== false) ? $dbPasswordEnv : '';
 
-                $pdo = new \PDO($dsn, $user, $password, [
-                    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-                    \PDO::ATTR_TIMEOUT => 2,
-                ]);
+                $pdo = null;
+                $lastException = null;
 
-                $stmt = $pdo->query('SELECT url FROM cors WHERE status_id = 1');
-                if ($stmt !== false) {
-                    $origins = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-                    $list = [];
-                    foreach ($origins as $origin) {
-                        if (is_string($origin)) {
-                            $list[] = $origin;
-                        }
+                foreach (array_unique($hostsToTry) as $host) {
+                    try {
+                        $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
+                        $pdo = new \PDO($dsn, $user, $password, [
+                            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                            \PDO::ATTR_TIMEOUT => 2,
+                        ]);
+                        break;
+                    } catch (\Throwable $e) {
+                        $lastException = $e;
                     }
-                    $allowedOrigins = $list;
                 }
 
-                // Grava no cache
-                $dir = dirname($cacheFile);
-                if (!is_dir($dir)) {
-                    mkdir($dir, 0777, true);
+                if ($pdo !== null) {
+                    $stmt = $pdo->query('SELECT url FROM cors WHERE status_id = 1');
+                    if ($stmt !== false) {
+                        $origins = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+                        $list = [];
+                        foreach ($origins as $origin) {
+                            if (is_string($origin)) {
+                                $list[] = trim($origin);
+                            }
+                        }
+                        $allowedOrigins = array_values(array_unique(array_filter($list, static fn (string $origin): bool => $origin !== '')));
+                    }
+                } elseif ($lastException !== null) {
+                    throw $lastException;
                 }
-
-                if (file_exists($cacheFile) && !is_writable($cacheFile)) {
-                    @unlink($cacheFile);
-                }
-
-                file_put_contents($cacheFile, json_encode($allowedOrigins));
             } catch (\Throwable $e) {
                 // Fallback de segurança se o banco estiver indisponível
                 $allowedOrigins = [
@@ -86,6 +98,20 @@ class CorsOriginsLoader
                     'https://pacs-app.websitesa.com.br',
                     'https://ris-app.websitesa.com.br',
                 ];
+            }
+
+            // Grava no cache
+            if ($allowedOrigins !== []) {
+                $dir = dirname($cacheFile);
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0777, true);
+                }
+
+                if (file_exists($cacheFile) && !is_writable($cacheFile)) {
+                    @unlink($cacheFile);
+                }
+
+                file_put_contents($cacheFile, json_encode($allowedOrigins, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
             }
         }
 
