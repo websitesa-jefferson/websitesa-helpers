@@ -12,16 +12,25 @@ use yii\httpclient\Client;
 class HostsHelper
 {
     /**
-     * Atualiza o /etc/hosts local e dispara a sincronização para PACS e RIS.
+     * Atualiza o /etc/hosts local e dispara a sincronização para todas as réplicas dos serviços no Swarm.
      */
     public static function syncAll(): void
     {
         $domains = self::getActiveDomains();
 
-        // 1. Atualiza o /etc/hosts do próprio container Auth-API
+        // 1. Atualiza o /etc/hosts do próprio container
         self::updateLocalHostsFile($domains);
 
-        // 2. Dispara a sincronização para o PACS e RIS via nomes de serviço Swarm (VIP)
+        // Limpa o cache do cors_origins.json localmente se existir
+        if (class_exists('Yii') && Yii::$app !== null) {
+            $cacheFile = Yii::getAlias('@app/runtime/tmp/cors_origins.json');
+            if (is_string($cacheFile) && file_exists($cacheFile)) {
+                @unlink($cacheFile);
+            }
+        }
+
+        // 2. Dispara a sincronização para todas as réplicas de todos os serviços Swarm
+        self::triggerRemoteSync('websitesa-auth-api_rest', $domains);
         self::triggerRemoteSync('websitesa-pacs-api_rest', $domains);
         self::triggerRemoteSync('websitesa-ris-api_rest', $domains);
     }
@@ -105,7 +114,7 @@ class HostsHelper
     }
 
     /**
-     * Envia uma requisição HTTP POST interna para sincronizar o hosts do container alvo.
+     * Envia requisições HTTP POST para cada réplica ativa do serviço via tasks.<service_name>.
      *
      * @param array<string> $domains
      */
@@ -121,16 +130,31 @@ class HostsHelper
                 $jsonContent = '{"domains":[]}';
             }
 
-            $client->createRequest()
-                ->setMethod('POST')
-                ->setUrl("http://{$containerName}/v1/internal/sync-hosts")
-                ->setHeaders([
-                    'X-Internal-Token' => $token,
-                    'Content-Type'     => 'application/json',
-                ])
-                ->setContent($jsonContent)
-                ->setOptions(['timeout' => 2]) // Timeout de 2 segundos
-                ->send(); // Chamada síncrona para garantir a entrega
+            // Resolve o DNS das tarefas do Swarm (retorna IP de TODAS as réplicas ativas)
+            $taskDNS = "tasks.{$containerName}";
+            $ips = gethostbynamel($taskDNS);
+
+            if ($ips === false || $ips === []) {
+                $ips = [$containerName];
+            }
+
+            foreach ($ips as $targetHost) {
+                try {
+                    $client->createRequest()
+                        ->setMethod('POST')
+                        ->setUrl("http://{$targetHost}/v1/internal/sync-hosts")
+                        ->setHeaders([
+                            'Host'             => $containerName,
+                            'X-Internal-Token' => $token,
+                            'Content-Type'     => 'application/json',
+                        ])
+                        ->setContent($jsonContent)
+                        ->setOptions(['timeout' => 2])
+                        ->send();
+                } catch (\Exception $e) {
+                    Yii::error("Erro ao sincronizar na réplica {$targetHost} de {$containerName}: " . $e->getMessage(), 'hosts-sync');
+                }
+            }
         } catch (\Exception $e) {
             Yii::error("Erro ao sincronizar hosts no container {$containerName}: " . $e->getMessage(), 'hosts-sync');
         }
