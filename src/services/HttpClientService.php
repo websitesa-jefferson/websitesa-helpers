@@ -56,7 +56,6 @@ final class HttpClientService extends Client implements HttpClientServiceInterfa
                     CURLOPT_SSL_VERIFYPEER => false,
                     CURLOPT_SSL_VERIFYHOST => false,
                     CURLOPT_TIMEOUT        => $timeout,
-                    // CURLOPT_RESOLVE        => ['cmdi.websitesa.app.br:443:104.21.13.73'],
                 ],
             ];
 

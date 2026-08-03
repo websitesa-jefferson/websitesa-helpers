@@ -123,7 +123,7 @@ class HostsHelper
         try {
             $client = new Client();
             $envToken = getenv('INTERNAL_SYNC_TOKEN');
-            $token = ($envToken !== false && $envToken !== '') ? $envToken : 'default_secret_token';
+            $token = ($envToken !== false && $envToken !== '') ? $envToken : '';
 
             $jsonContent = json_encode(['domains' => $domains]);
             if ($jsonContent === false) {
