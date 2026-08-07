@@ -135,6 +135,11 @@ class HostsHelper
             $ips = gethostbynamel($taskDNS);
 
             if ($ips === false || $ips === []) {
+                $fallbackIp = gethostbyname($containerName);
+                if ($fallbackIp === $containerName) {
+                    Yii::info("Serviço {$containerName} indisponível no DNS no momento. Sincronização remota ignorada.", 'hosts-sync');
+                    return;
+                }
                 $ips = [$containerName];
             }
 
