@@ -7,7 +7,6 @@ namespace Websitesa\Yii2\Helpers\Services;
 use Throwable;
 use Websitesa\Yii2\Helpers\Dtos\HttpResponseDto;
 use Websitesa\Yii2\Helpers\Helpers\RequestHelper;
-use yii\base\InvalidArgumentException;
 use yii\httpclient\Client;
 use yii\httpclient\CurlTransport;
 use yii\httpclient\Response;
@@ -103,7 +102,7 @@ final class HttpClientService extends Client implements HttpClientServiceInterfa
     {
         try {
             return $response->getData() ?? [];
-        } catch (InvalidArgumentException) {
+        } catch (Throwable) {
             $content = $response->getContent();
 
             if ($content !== '') {

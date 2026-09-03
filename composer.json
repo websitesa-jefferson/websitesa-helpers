@@ -38,7 +38,7 @@
   "scripts": {
     "test"     : "docker exec -t websitesa-helpers-yii2 php vendor/bin/phpunit",
     "cs-fixer" : "docker exec -t websitesa-helpers-yii2 php vendor/bin/php-cs-fixer fix",
-    "phpstan"  : "docker exec -t websitesa-helpers-yii2 php vendor/bin/phpstan analyse --memory-limit=512M --level=9"
+    "php-stan"  : "docker exec -t websitesa-helpers-yii2 php vendor/bin/phpstan analyse --memory-limit=512M --level=9"
   },
   "autoload": {
     "psr-4": {
