@@ -3,6 +3,7 @@
 #git commit -m "Removendo meu-diretorio do controle de versão"
 
 # composer vendor dir
+.env
 var/
 vendor/
 .php-cs-fixer.cache
