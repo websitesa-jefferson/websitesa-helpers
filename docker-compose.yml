@@ -9,6 +9,8 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ./:/app
+    env_file:
+      - .env
     restart: unless-stopped
     cpus: 0.3
     mem_limit: 512m
