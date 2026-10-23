@@ -114,6 +114,4 @@ git tag -a v2.0.0 -m "API reestruturada - breaking changes"
 git push origin v2.0.0
 ```
 
----
-
 📌 **Dica:** sempre crie tags na branch principal (`main` ou `master`), garantindo que representem uma versão estável do projeto.
