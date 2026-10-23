@@ -13,6 +13,7 @@ use yii\db\BaseActiveRecord;
  * Behavior que preenche automaticamente o atributo de identificador universal único
  * com um UUIDv7 antes de inserir o registro no banco de dados.
  *
+ * @extends Behavior<BaseActiveRecord>
  * @property BaseActiveRecord $owner
  */
 final class UuidBehavior extends Behavior

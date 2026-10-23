@@ -18,10 +18,11 @@ class BaseFixture extends ActiveFixture
         $rows = parent::getData();
 
         foreach ($rows as &$row) {
-            if (!isset($row['uid'])) {
+            if (!isset($row['uid']) || $row['uid'] === '') {
                 $row['uid'] = UuidHelper::generateV7();
             }
         }
+        unset($row);
 
         return $rows;
     }

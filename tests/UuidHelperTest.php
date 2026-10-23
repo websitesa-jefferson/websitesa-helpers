@@ -34,7 +34,7 @@ class UuidHelperTest extends TestCase
         self::assertContains($parts[3][0], ['8', '9', 'a', 'b']);
     }
 
-    public function testMonotonicOrdering(): void
+    public function testLexicalOrderingByTimestamp(): void
     {
         $uuid1 = UuidHelper::generateV7(1_700_000_000_000);
         $uuid2 = UuidHelper::generateV7(1_700_000_000_100);
@@ -42,6 +42,29 @@ class UuidHelperTest extends TestCase
 
         self::assertLessThan(0, strcmp($uuid1, $uuid2));
         self::assertLessThan(0, strcmp($uuid2, $uuid3));
+    }
+
+    public function testGenerateV7Supports48BitTimestampBoundaries(): void
+    {
+        foreach ([0, 0xFFFFFFFFFFFF] as $timestampMs) {
+            $uuid = UuidHelper::generateV7($timestampMs);
+
+            self::assertSame($timestampMs, UuidHelper::getTimestampMs($uuid));
+        }
+    }
+
+    public function testGenerateV7RejectsNegativeTimestamp(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        UuidHelper::generateV7(-1);
+    }
+
+    public function testGenerateV7RejectsTimestampAbove48Bits(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        UuidHelper::generateV7(0x1000000000000);
     }
 
     public function testTimestampExtraction(): void
