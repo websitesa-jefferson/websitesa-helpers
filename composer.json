@@ -43,6 +43,7 @@
   "autoload": {
     "psr-4": {
       "Websitesa\\Yii2\\Helpers\\Bases\\": "src/bases/",
+      "Websitesa\\Yii2\\Helpers\\Behaviors\\": "src/behaviors/",
       "Websitesa\\Yii2\\Helpers\\Dtos\\": "src/dtos/",
       "Websitesa\\Yii2\\Helpers\\Enums\\": "src/enums/",
       "Websitesa\\Yii2\\Helpers\\Filters\\": "src/filters/",
